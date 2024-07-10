@@ -15,6 +15,9 @@ class AuthViewModel: ObservableObject {
     // Burasi Kullanici register olduktan sonra kullaniciyi Profil forografi yukleme ekranina goturecegimiz kisim icin
     @Published var didAuthenticateUser = false
     
+    // Burasi profil fotografi yukleme kismi icin
+    private var tempUserSession: FirebaseAuth.User?
+    
     init() {
         // Buradaki "Auth.auth().currentUser" kodu server tarafini kontrol ediyor kullanici login mi diye.
         self.userSession = Auth.auth().currentUser
@@ -44,7 +47,7 @@ class AuthViewModel: ObservableObject {
             }
             
             guard let user = result?.user else { return }
-            
+            self.tempUserSession = user
             
             // Kullanici bilgilerini almak ve database'e kaydetmek icin bir data dictionary olusturuyorum.
             let data = [
@@ -69,6 +72,22 @@ class AuthViewModel: ObservableObject {
         
         // Bu kod ise server tarafinda signout yapiyor.
         try? Auth.auth().signOut()
+    }
+    
+    // Burasi Profil fotografi yukleme alani ile ilgili
+    func uploadProfileImage(_ image: UIImage) {
+        guard let uid = tempUserSession?.uid else { return }
+        
+        ImageUploader.uploadImage(image: image) { profileImageUrl in
+            // Burada database'deki users datasina gidiyoruz
+            Firestore.firestore().collection("users")
+                // uid ile dogru profil idsine gidiyoruz
+                .document(uid)
+                // profil fotografini upload ediyoruz.
+                .updateData(["profileImageUrl": profileImageUrl]) { _ in
+                    self.userSession = self.tempUserSession
+                }
+        }
     }
     
 }

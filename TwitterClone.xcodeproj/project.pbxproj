@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8627BC852C3DCADA00CF73A1 /* ProfilePhotoSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8627BC842C3DCADA00CF73A1 /* ProfilePhotoSelectorView.swift */; };
 		8627BC882C3DE17E00CF73A1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8627BC872C3DE17E00CF73A1 /* ImagePicker.swift */; };
+		8627BC8A2C3F22A800CF73A1 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8627BC892C3F22A800CF73A1 /* ImageUploader.swift */; };
 		8635DFA82C31F8D4002643D0 /* SideMenuOptionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635DFA72C31F8D4002643D0 /* SideMenuOptionRowView.swift */; };
 		8635DFAF2C373326002643D0 /* NewTweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635DFAE2C373326002643D0 /* NewTweetView.swift */; };
 		8635DFB12C373517002643D0 /* TextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635DFB02C373517002643D0 /* TextArea.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		8627BC842C3DCADA00CF73A1 /* ProfilePhotoSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoSelectorView.swift; sourceTree = "<group>"; };
 		8627BC872C3DE17E00CF73A1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		8627BC892C3F22A800CF73A1 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		8635DFA72C31F8D4002643D0 /* SideMenuOptionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionRowView.swift; sourceTree = "<group>"; };
 		8635DFAE2C373326002643D0 /* NewTweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetView.swift; sourceTree = "<group>"; };
 		8635DFB02C373517002643D0 /* TextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArea.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		86BA708D2C316850000106F0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				8627BC892C3F22A800CF73A1 /* ImageUploader.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				8627BC882C3DE17E00CF73A1 /* ImagePicker.swift in Sources */,
 				86BA70812C316846000106F0 /* ContentView.swift in Sources */,
 				8635DFC12C397E8D002643D0 /* AuthHeaderView.swift in Sources */,
+				8627BC8A2C3F22A800CF73A1 /* ImageUploader.swift in Sources */,
 				86BA70992C316B17000106F0 /* TweetRowView.swift in Sources */,
 				8635DFBC2C374B20002643D0 /* CustomInputField.swift in Sources */,
 				86BA70AC2C3190B4000106F0 /* TweetFilterViewModel.swift in Sources */,
