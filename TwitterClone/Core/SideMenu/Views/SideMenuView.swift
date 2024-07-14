@@ -6,61 +6,68 @@
 //
 
 import SwiftUI
+// Profil fotografini gostermek icin Kingfisher kutuphanesini kullaniyoruz.
+import Kingfisher
 
 struct SideMenuView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading){
-                Circle()
-                    .frame(width: 48, height: 48)
-                
-                VStack(alignment: .leading, spacing: 4){
-                    Text("Bruce Wayne")
-                        .font(.subheadline)
+            if let user = authViewModel.currentUser {
+                VStack(alignment: .leading) {
+                    // KFImage ile Kingfisher kutuphanesinden bu ozelligi kullaniyoruz.
+                    KFImage(URL(string: user.profileImageUrl))
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .frame(width: 48, height: 48)
                     
-                    Text("@batman")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(user.fullname)
+                            .font(.subheadline)
+                        
+                        Text("@\(user.username)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    UserStatsView()
+                        .padding(.vertical)
                 }
+                .padding(.leading)
+                .padding(.bottom, 15)
                 
-                UserStatsView()
-                    .padding(.vertical)
-            }
-            .padding(.leading)
-            .padding(.bottom, 20)
-            
-            ForEach(SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
+                Divider()
                 
-                if viewModel == .profile {
-                    NavigationLink {
-                        ProfileView()
-                    } label: {
+                ForEach(SideMenuViewModel.allCases, id: \.rawValue) { viewModel in
+                    if viewModel == .profile {
+                        NavigationLink(destination: ProfileView(user: user)) {
+                            SideMenuOptionRowView(viewModel: viewModel)
+                        }
+                    } else if viewModel == .logout {
+                        Button {
+                            authViewModel.signOut()
+                        } label: {
+                            SideMenuOptionRowView(viewModel: viewModel)
+                        }
+                    } else {
                         SideMenuOptionRowView(viewModel: viewModel)
                     }
-
-                } else if viewModel == .logout {
-                    Button {
-                        // Bu kodu AuthViewModel icerisinden cagiriyorum. Yukarida da @EnvironmentObject var authViewModel: AuthViewModel olarak import ettim.
-                        authViewModel.signOut()
-                    } label: {
-                        SideMenuOptionRowView(viewModel: viewModel)
-                    }
-
-                } else {
-                    SideMenuOptionRowView(viewModel: viewModel)
                 }
-                
+                Spacer()
+            } else {
+                Text("Something gone worng!")
+                    .font(.headline)
+                    .padding()
             }
-            Spacer()
         }
         .background(Color.white)
-        .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure it takes up the full available space
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
-
 #Preview {
     SideMenuView()
+        .environmentObject(AuthViewModel())
 }

@@ -15,14 +15,18 @@ class AuthViewModel: ObservableObject {
     // Burasi Kullanici register olduktan sonra kullaniciyi Profil forografi yukleme ekranina goturecegimiz kisim icin
     @Published var didAuthenticateUser = false
     
+    @Published var currentUser: User?
+    
     // Burasi profil fotografi yukleme kismi icin
     private var tempUserSession: FirebaseAuth.User?
+    
+    private let service = UserService()
     
     init() {
         // Buradaki "Auth.auth().currentUser" kodu server tarafini kontrol ediyor kullanici login mi diye.
         self.userSession = Auth.auth().currentUser
         
-        print("DEBUG: User session is \(String(describing: self.userSession?.uid))")
+        self.fecthUser()
     }
     
     func login(withEmail email: String, password: String) {
@@ -87,6 +91,14 @@ class AuthViewModel: ObservableObject {
                 .updateData(["profileImageUrl": profileImageUrl]) { _ in
                     self.userSession = self.tempUserSession
                 }
+        }
+    }
+    
+    func fecthUser() {
+        guard let uid = self.userSession?.uid else { return }
+        
+        service.fecthUser(withUid: uid) { user in
+            self.currentUser = user
         }
     }
     
