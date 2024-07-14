@@ -37,7 +37,8 @@ class AuthViewModel: ObservableObject {
             
             guard let user = result?.user else { return }
             self.userSession = user
-            print("DEBUG: Did log user in..")
+            // Bu kod ile database'den guncel kullanici bilgilerini cekip gosteriyoruz.
+            self.fecthUser()
         }
     }
     
@@ -90,6 +91,7 @@ class AuthViewModel: ObservableObject {
                 // profil fotografini upload ediyoruz.
                 .updateData(["profileImageUrl": profileImageUrl]) { _ in
                     self.userSession = self.tempUserSession
+                    self.fecthUser()
                 }
         }
     }
