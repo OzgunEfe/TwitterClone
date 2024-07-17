@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedIndex = 0
+    @Binding var selectedIndex: Int
     
     var body: some View {
         TabView(selection: $selectedIndex) {
@@ -41,10 +41,9 @@ struct MainTabView: View {
                     Image(systemName: "envelope")
                 }.tag(3)
         }
-                
     }
 }
 
 #Preview {
-    MainTabView()
+    MainTabView(selectedIndex: .constant(0)) 
 }

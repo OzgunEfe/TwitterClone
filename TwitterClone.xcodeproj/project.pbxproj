@@ -24,6 +24,7 @@
 		8635DFCA2C398856002643D0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8635DFC92C398856002643D0 /* FirebaseFirestoreSwift */; };
 		8635DFCC2C398856002643D0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8635DFCB2C398856002643D0 /* FirebaseStorage */; };
 		8635DFCE2C39A9D3002643D0 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635DFCD2C39A9D3002643D0 /* AuthViewModel.swift */; };
+		8666C6F62C48429B00799416 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8666C6F52C48429B00799416 /* SearchBar.swift */; };
 		86BA707F2C316846000106F0 /* TwitterCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BA707E2C316846000106F0 /* TwitterCloneApp.swift */; };
 		86BA70812C316846000106F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BA70802C316846000106F0 /* ContentView.swift */; };
 		86BA70832C316847000106F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86BA70822C316847000106F0 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		8635DFC02C397E8D002643D0 /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		8635DFC22C3986FD002643D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8635DFCD2C39A9D3002643D0 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		8666C6F52C48429B00799416 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		86BA707B2C316846000106F0 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86BA707E2C316846000106F0 /* TwitterCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCloneApp.swift; sourceTree = "<group>"; };
 		86BA70802C316846000106F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				8635DFB02C373517002643D0 /* TextArea.swift */,
 				8635DFB92C37422F002643D0 /* RoundedShape.swift */,
 				8635DFBB2C374B20002643D0 /* CustomInputField.swift */,
+				8666C6F52C48429B00799416 /* SearchBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				86BA707F2C316846000106F0 /* TwitterCloneApp.swift in Sources */,
 				86BA70A22C317DC6000106F0 /* ExploreView.swift in Sources */,
 				86BA70BA2C31CF24000106F0 /* SideMenuViewModel.swift in Sources */,
+				8666C6F62C48429B00799416 /* SearchBar.swift in Sources */,
 				8635DFB12C373517002643D0 /* TextArea.swift in Sources */,
 				86BA70B12C31C821000106F0 /* UserRowView.swift in Sources */,
 				8635DFB62C373FB5002643D0 /* LoginView.swift in Sources */,
