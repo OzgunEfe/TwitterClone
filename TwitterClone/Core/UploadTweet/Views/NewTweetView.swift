@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct NewTweetView: View {
     @State private var caption = ""
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @ObservedObject var viewModel = UploadTweetViewModel()
     
     var body: some View {
         VStack(alignment: .leading){
@@ -26,7 +29,7 @@ struct NewTweetView: View {
                 Spacer()
                 
                 Button {
-                    print("Tweet")
+                    viewModel.uploadTweet(withCaption: caption)
                 } label: {
                     Text("Tweet")
                         .bold()
@@ -41,14 +44,26 @@ struct NewTweetView: View {
             .padding()
             
             HStack(alignment: .top){
-                Circle()
-                    .frame(width: 64, height: 64)
+                if let user = authViewModel.currentUser {
+                    KFImage(URL(string: user.profileImageUrl))
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
+                        .frame(width: 64, height: 64)
+                }
                 
                 TextArea("What's happening?", text: $caption)
                     .padding(.leading, 12)
                 
             }
             .padding()
+        }
+        // Bu kod ile yeni tweet'in upload edilip edilmedigine bakip aksiyon aliyorum.
+        .onReceive(viewModel.$didUploadTweet) { success in
+            if success {
+                // tweet'in database'e upload'i basarili ise dismiss edip ekrani kapatiyorum.
+                presentationMode.wrappedValue.dismiss()
+            }
         }
         
         Spacer()
