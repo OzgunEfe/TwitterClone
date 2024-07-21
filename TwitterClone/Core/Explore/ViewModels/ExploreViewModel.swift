@@ -36,7 +36,6 @@ class ExploreViewModel: ObservableObject {
         service.fecthUsers { users in
             self.users = users
             
-            print("DEBUG: Users are \(users)")
         }
     }
 }
