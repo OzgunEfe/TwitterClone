@@ -31,6 +31,7 @@ struct TweetService {
             }
     }
     
+    // Bu fonksiyon ile Firebase uzerinden tweetlere ulasiyorum
     func fetchTweets(completion: @escaping([Tweet]) -> Void) {
         Firestore.firestore().collection("tweets")
             // .order kodu ile Tweetleri tarihe gore siraladim
@@ -39,6 +40,17 @@ struct TweetService {
             guard let documents = snapshot?.documents else { return }
             let tweets = documents.compactMap({ try? $0.data(as: Tweet.self) })
             completion(tweets)
+        }
+    }
+    
+    // Bu fonkiyon ile yine Firebase uzerinden tweets'e gidiyorum ve uid'i yakaliyorum. Bu sayede sadece bu kullanicinin gonderdigi tweetleri yakaliyorum.
+    func fetchTweets(forUid uid: String, completion: @escaping([Tweet]) -> Void) {
+        Firestore.firestore().collection("tweets")
+            .whereField("uid", isEqualTo: uid)
+            .getDocuments { snapshot, _ in
+            guard let documents = snapshot?.documents else { return }
+            let tweets = documents.compactMap({ try? $0.data(as: Tweet.self) })
+                completion(tweets.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() }))
         }
     }
 }
