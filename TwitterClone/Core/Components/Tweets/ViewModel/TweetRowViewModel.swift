@@ -23,6 +23,12 @@ class TweetRowViewModel: ObservableObject {
         }
     }
     
+    func unlikeTweet() {
+        service.unLikeTweet(tweet) {
+            self.tweet.didLike = false
+        }
+    }
+    
     func checkIfUserLikedTweet() {
         service.checkIfUserLikedTweet(tweet) { didLike in
             if didLike {

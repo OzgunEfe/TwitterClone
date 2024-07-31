@@ -69,6 +69,21 @@ struct TweetService {
             }
     }
     
+    func unLikeTweet(_ tweet: Tweet, completion: @escaping() -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let tweetId = tweet.id else { return }
+        guard tweet.likes > 0 else { return }
+        
+        let userLikeRef = Firestore.firestore().collection("users").document(uid).collection("user-likes")
+        
+        Firestore.firestore().collection("tweets").document(tweetId)
+            .updateData(["likes": tweet.likes - 1]) { _ in
+                userLikeRef.document(tweetId).delete { _ in
+                    completion()
+                }
+            }
+    }
+    
     // "users" data structure bolumune gidiyorum oradan "user-likes" colection'i kontrol ediyorum. Eger tweet id bu listede mevcut ise kullanicinin tweeti begendigini anliyorum.
     func checkIfUserLikedTweet(_ tweet: Tweet, completion: @escaping(Bool) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -84,4 +99,5 @@ struct TweetService {
             }
         
     }
+
 }
