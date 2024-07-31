@@ -58,7 +58,7 @@ struct TweetService {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let tweetId = tweet.id else { return }
         
-        // firestore ile firebase ulasiyoruz. Sonrasinda "users" > uid > "user-likes" ile like'lara ulasiyoruz.
+        // firestore ile firebase ulasiyorum. Sonrasinda "users" > uid > "user-likes" ile like'lara ulasiyorum.
         let userLikeRef = Firestore.firestore().collection("users").document(uid).collection("user-likes")
         
         Firestore.firestore().collection("tweets").document(tweetId)
@@ -67,5 +67,21 @@ struct TweetService {
                     completion()
                 }
             }
+    }
+    
+    // "users" data structure bolumune gidiyorum oradan "user-likes" colection'i kontrol ediyorum. Eger tweet id bu listede mevcut ise kullanicinin tweeti begendigini anliyorum.
+    func checkIfUserLikedTweet(_ tweet: Tweet, completion: @escaping(Bool) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let tweetId = tweet.id else { return }
+        
+        Firestore.firestore().collection("users")
+            .document(uid)
+            .collection("user-likes")
+            .document(tweetId).getDocument { snapshot, _ in
+                guard let snapshot = snapshot else { return }
+                // Buradaki .exists bilginin var olup olmadigina gore true ya da false donuyor.
+                completion(snapshot.exists)
+            }
+        
     }
 }
